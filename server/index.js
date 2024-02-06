@@ -15,7 +15,7 @@ connectDB()
         throw error
     })
 
-    app.use("/api/v1/user", userRouter)
+    app.use("/api/v1/auth", userRouter)
 })
 .catch((error) => {
     console.log("MongoDB connection failed ", error);

@@ -9,7 +9,7 @@ export const signupController = async (req, res) => {
 
         const existingUser = await User.findOne({ $or: [{username}, {email}] })
         if (existingUser) {
-            res.status(409).json({
+            return res.status(409).json({
                 success: false,
                 message: "User with username or email already exists"
             })
