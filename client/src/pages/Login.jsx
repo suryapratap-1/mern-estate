@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { signInStart, signInSuccess, signInFailure } from '../redux/slices/userSlice'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import OAuth from '../components/OAuth'
 
 const Login = () => {
 
@@ -32,7 +33,7 @@ const Login = () => {
             )
             const data = await res.json();
             if (data.success === false) {
-                dispatch(signInFailure());
+                dispatch(signInFailure(data.error));
                 return;
             };
             dispatch(signInSuccess(data));
@@ -51,22 +52,31 @@ const Login = () => {
             <form onSubmit={submitHandler} className='flex flex-col gap-4'>
 
                 <label htmlFor="email">
-                    <input type="email" id='email' name='email' placeholder='Email' required 
+                    <input type="email" id='email' name='email' placeholder='Email' 
                         className=' w-[400px] py-2 px-3 border-2 border-black rounded-sm'
                         onChange={changeHandler}
                     />
                 </label>
 
                 <label htmlFor="password">
-                    <input type="password" id='password' name='password' placeholder='Password' required 
+                    <input type="password" id='password' name='password' placeholder='Password' 
                         className=' w-[400px] py-2 px-3 border-2 border-black rounded-sm'
                         onChange={changeHandler}
                     />
                 </label>
 
-                <button className=' bg-blue-600 text-white py-3 rounded hover:bg-blue-800'>
+                <button className=' bg-violet-600 text-white py-3 rounded hover:bg-violet-800'>
                     {loading ? "Loading..." : "Login"}
                 </button>
+
+                <OAuth />
+
+                <div className='flex gap-2'>
+                    <p>Dont have an account?</p>
+                    <Link to='/sign-up'>
+                        <span className='text-violet-600'>Sign Up</span>
+                    </Link>
+                </div>
 
                 <p className='text-red-500'>
                     {error ? error : ""}

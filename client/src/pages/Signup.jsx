@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import OAuth from '../components/OAuth';
 
 const Signup = () => {
 
@@ -48,7 +48,7 @@ const Signup = () => {
             <form onSubmit={submitHandler} className='flex flex-col gap-4'>
                 <label htmlFor="username">
                     <input 
-                        type="text" name="username" id="username" placeholder='Username' required 
+                        type="text" name="username" id="username" placeholder='Username'  
                         className=' w-[400px] py-2 px-3 border-2 border-black rounded-sm'
                         onChange={changeHandler}
                     />
@@ -56,7 +56,7 @@ const Signup = () => {
 
                 <label htmlFor="email">
                     <input 
-                        type="email" name="email" id="email" placeholder='Email' required 
+                        type="email" name="email" id="email" placeholder='Email'  
                         className=' w-[400px] py-2 px-3 border-2 border-black rounded-sm'
                         onChange={changeHandler}
                     />
@@ -64,7 +64,7 @@ const Signup = () => {
 
                 <label htmlFor="password">
                     <input
-                        type="password" name="password" id="password" placeholder='Password' required 
+                        type="password" name="password" id="password" placeholder='Password'  
                         className=' w-[400px] py-2 px-3 border-2 border-black rounded-sm'
                         onChange={changeHandler}
                     />
@@ -73,6 +73,15 @@ const Signup = () => {
                 <button className=' bg-blue-600 text-white py-3 rounded hover:bg-blue-800'>
                     {loading ? "Loading..." : "Sign Up"}
                 </button>
+
+                <OAuth />
+
+                <div className='flex gap-2'>
+                    <p>Already have an account?</p>
+                    <Link to='/login'>
+                        <span className='text-blue-600'>Login</span>
+                    </Link>
+                </div>
 
                 <p className='text-red-500'>
                     {error ? error : ""}
