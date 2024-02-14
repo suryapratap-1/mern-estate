@@ -6,11 +6,11 @@ import userSlice from './slices/userSlice'
 const store = configureStore({
   reducer: { user: userSlice },
 
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   
-  // middleware: (getDefaultMiddleware) => {
-  //   serializableCheck: false
-  // }
+  // // middleware: (getDefaultMiddleware) => {
+  // //   serializableCheck: false
+  // // }
 })
 
 export default store  
