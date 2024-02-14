@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../components/OAuth';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInStart, signInSuccess, signInFailure } from '../redux/slices/userSlice'
 
 const Signup = () => {
 
     const navigate = useNavigate();
-    // const [formData, setFormData] = useState({ username: "", email: "", password: "" });
+    const dispatch = useDispatch();
+    const { loading, error } = useSelector(state => state.user);
     const [formData, setFormData] = useState({});
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(null);
     
     const changeHandler = (e) => {
         setFormData({
@@ -19,25 +20,28 @@ const Signup = () => {
     
     const submitHandler = async (e) => {
         e.preventDefault();
-        setLoading(true);
-        const res = await fetch('/api/v1/auth/sign-up', 
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            }
-        );
-        const data = await res.json();
-        if (data.success === false) {
-            setError(data.message);
-            setLoading(false);
-            return;
-        };
-        setLoading(false);
-        setError(null);
-        navigate('/');
+        dispatch(signInStart());
+        try {
+            const res = await fetch('/api/v1/auth/sign-up', 
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                }
+            );
+            const data = await res.json();
+            console.log(data)
+            if (data.success === false) {
+                dispatch(signInFailure(data.error));
+                return;
+            };
+            dispatch(signInSuccess(data));
+            navigate('/');
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (

@@ -16,9 +16,11 @@ export const signupController = async (req, res) => {
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await User.create({ username, email, password: hashedPassword });
+        const userData = await User.findById(newUser._id, "-password");
 
         res.status(200).json({
             success: true,
+            data: userData,
             message: "Successfully created user"
         })
         // return res.status(200).json(

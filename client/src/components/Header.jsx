@@ -2,12 +2,26 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { IoHome } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { signOutSuccess } from "../redux/slices/userSlice"
 
 const Header = () => {
 
     const user = useSelector(state => state.user);
-    console.log(user)
+    const dispatch = useDispatch();
+    // console.log(user)
+
+    const signOutHandler = async () => {
+        try {
+            const response = await fetch("/api/v1/auth/signout");
+            const data = await response.json();
+            if (data.success === false)  return;
+            dispatch(signOutSuccess(data))
+            // console.log("Logged out", data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <nav className=' px-4 min-[769px]:px-24 min-[]: flex items-center justify-between w-full h-16 shadow'>
@@ -53,7 +67,7 @@ const Header = () => {
                                     Dashboard
                                 </button>
                             </Link>
-                            <button className='w-20 h-10 font-medium bg-violet-600 border border-violet-600 rounded'>
+                            <button onClick={signOutHandler} className='w-20 h-10 font-medium bg-violet-600 border border-violet-600 rounded'>
                                 Sign out
                             </button>
                             <Link to='/profile'>
