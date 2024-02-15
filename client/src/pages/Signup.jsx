@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../components/OAuth';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInSuccess, signInFailure } from '../redux/slices/userSlice'
+import toast from 'react-hot-toast';
 
 const Signup = () => {
 
@@ -38,6 +39,7 @@ const Signup = () => {
                 return;
             };
             dispatch(signInSuccess(data));
+            toast.success(data.message);
             navigate('/');
         } catch (error) {
             console.log(error);

@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux"
 import { signInStart, signInSuccess, signInFailure } from '../redux/slices/userSlice'
 import { Link, useNavigate } from 'react-router-dom'
 import OAuth from '../components/OAuth'
+import toast from 'react-hot-toast'
 
 const Login = () => {
-
     const navigate = useNavigate();
     const [formData, setFormData] = useState();
     const { loading, error } = useSelector(state => state.user);
@@ -18,8 +18,8 @@ const Login = () => {
         });
     };
 
-    const submitHandler = async (e) => {
-        e.preventDefault();
+    const submitHandler = async (event) => {
+        event.preventDefault();
         dispatch(signInStart());
         try {
             const res = await fetch('/api/v1/auth/login', 
@@ -30,14 +30,16 @@ const Login = () => {
                     },
                     body: JSON.stringify(formData)
                 }
-            )
+            )   
             const data = await res.json();
+            console.log(data)
             if (data.success === false) {
-                dispatch(signInFailure(data.error));
+                dispatch(signInFailure(data.message));
                 return;
             };
             dispatch(signInSuccess(data));
             navigate('/');
+            toast.success(data.message);
         } 
         catch (error) {
             console.log(error);
@@ -52,14 +54,14 @@ const Login = () => {
             <form onSubmit={submitHandler} className='flex flex-col gap-4'>
 
                 <label htmlFor="email">
-                    <input type="email" id='email' name='email' placeholder='Email' 
+                    <input type="email" id='email' name='email' placeholder='Email' required
                         className=' w-[400px] py-2 px-3 border-2 border-black rounded-sm'
                         onChange={changeHandler}
                     />
                 </label>
 
                 <label htmlFor="password">
-                    <input type="password" id='password' name='password' placeholder='Password' 
+                    <input type="password" id='password' name='password' placeholder='Password' required
                         className=' w-[400px] py-2 px-3 border-2 border-black rounded-sm'
                         onChange={changeHandler}
                     />

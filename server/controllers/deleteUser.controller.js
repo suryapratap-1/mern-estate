@@ -7,7 +7,6 @@ export const deleteUser = async (req, res) => {
             success: true,
             message: "User profile deleted successfully."
         })
-
     } 
     catch (error) {
         console.log(error);
