@@ -19,15 +19,19 @@ export const updateUserInfoController = async (req, res) => {
                     username: req.body.username,
                     email: req.body.email,
                     password: req.body.password,
-                    avatar: req.body.avatar
+                    avatar: req.body.avatar,
                 }
             }, { new: true }
-        );
-
-        return res.status(200).json({
-            success: true,
-            message: "User updated successfully."
-        })
+        )
+        
+        const { password: pass, ...rest } = updatedUser._doc;
+        if (updatedUser) {
+            return res.status(200).json({
+                success: true,
+                data: rest,
+                message: "User updated successfully."
+            })
+        }
     } 
     catch (error) {
         console.log(error);
