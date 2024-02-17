@@ -7,7 +7,6 @@ import { signOutSuccess } from "../redux/slices/userSlice"
 import toast from 'react-hot-toast';
 
 const Header = () => {
-
     const navigate = useNavigate();
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
@@ -26,14 +25,14 @@ const Header = () => {
     }
 
     return (
-        <nav className=' px-4 min-[769px]:px-24 min-[]: flex items-center justify-between w-full h-16 shadow'>
+        <nav className='px-4 min-[769px]:px-20 flex items-center justify-between w-full py-2 text-sm shadow'>
 
             <Link to='/'>
                 <div className='flex items-center gap-2 font-bold text-2xl'>
-                    <IoHome className='text-violet-600'/>
+                    <IoHome className='text-violet-500'/>
                     <div>
                         <span className=' text-gray-700'>ESTATE</span>
-                        <span className=' text-violet-600'>.com</span>
+                        <span className=' text-violet-500'>.com</span>
                     </div>
                 </div>
             </Link>
@@ -61,21 +60,21 @@ const Header = () => {
                     user.currentUser != null ?
                     (
                         <div className='sm:flex hidden items-center gap-3 text-white'>
-                            {/* <Link to="/">
-                                <button className='px-6 h-10 font-medium text-black border-2 border-gray-300 rounded'>
-                                    Home
-                                </button>
-                            </Link> */}
-                            <Link to='/dashboard'>
-                                <button className='px-6 h-10 font-medium text-black border-2 border-gray-300 rounded'>
+                            {/* <Link to='/dashboard'>
+                                <button className='px-6 h-10 font-medium text-black border-2 border-gray-300 rounded hover:bg-violet-500 hover:text-white hover:border-violet-500'>
                                     Dashboard
                                 </button>
+                            </Link> */}
+                            <Link>
+                                <button className='px-6 h-10 font-medium text-black border-2 border-gray-300 rounded hover:bg-violet-500 hover:text-white hover:border-violet-500'>
+                                    About
+                                </button>
                             </Link>
-                            <button onClick={signOutHandler} className='w-20 h-10 font-medium bg-violet-600 border border-violet-600 rounded'>
+                            <button onClick={signOutHandler} className='w-20 h-10 font-medium bg-violet-500 border border-violet-500 rounded'>
                                 Sign out
                             </button>
                             <Link to='/profile'>
-                                <button className='pl-2'>
+                                <button className='pl-2 grid place-items-center'>
                                     <img className='w-10 rounded-full border border-violet-600'
                                         src={user.currentUser.data.avatar} alt="profile" 
                                     />
@@ -86,10 +85,12 @@ const Header = () => {
                     (
                         <div className=' gap-3 text-white sm:flex hidden'>
                             <Link to='login'>
-                                <button className='w-20 h-10 font-medium text-black border-2 border-gray-300 rounded' >Login</button>
+                                <button className='w-20 h-10 font-medium text-black border-2 border-gray-300 rounded hover:bg-violet-500 hover:text-white hover:border-violet-500'>
+                                    Login
+                                </button>
                             </Link>
                             <Link to='sign-up'>
-                                <button className='w-20 h-10 font-medium bg-violet-600 border border-violet-600 rounded' >Sign up</button>
+                                <button className='w-20 h-10 font-medium bg-violet-500 border border-violet-500 rounded' >Sign up</button>
                             </Link>
                         </div>
                     ) 

@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./database/database.js";
 import { app } from "./app.js"
 import { userRouter } from "./routes/user.router.js";
+import { listingRouter } from "./routes/listing.router.js";
 
 dotenv.config()
 
@@ -15,7 +16,8 @@ connectDB()
         throw error
     })
 
-    app.use("/api/v1/auth", userRouter)
+    app.use("/api/v1/auth", userRouter);
+    app.use("/api/v1/listings", listingRouter);
 })
 .catch((error) => {
     console.log("MongoDB connection failed ", error);

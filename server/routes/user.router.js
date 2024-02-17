@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { signupController } from "../controllers/signup.controller.js";
-import { loginController } from "../controllers/login.controller.js";
-import { googleAuthController } from "../controllers/googleAuth.controller.js";
-import { updateUserInfoController } from "../controllers/update.controller.js"
+import { signupController } from "../controllers/userAuth.controller.js";
+import { loginController } from "../controllers/userAuth.controller.js";
+import { googleAuthController } from "../controllers/userAuth.controller.js";
+import { updateUserInfoController } from "../controllers/userAuth.controller.js"
 import { verifyToken } from "../middlewares/verifyToken.middleware.js"
-import { deleteUser } from "../controllers/deleteUser.controller.js";
-import { signOutController } from "../controllers/signout.controller.js";
+import { deleteUser } from "../controllers/userAuth.controller.js";
+import { signOutController } from "../controllers/userAuth.controller.js";
 
 import { verifyUser } from "../middlewares/verifyUser.middleware.js";
 

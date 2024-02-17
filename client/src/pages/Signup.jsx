@@ -40,7 +40,7 @@ const Signup = () => {
             };
             dispatch(signInSuccess(data));
             toast.success(data.message);
-            navigate('/');
+            navigate('/login');
         } catch (error) {
             console.log(error);
         }
