@@ -4,7 +4,7 @@ import { app } from "./app.js"
 import { userRouter } from "./routes/user.router.js";
 import { listingRouter } from "./routes/listing.router.js";
 
-dotenv.config()
+dotenv.config();
 
 connectDB()
 .then(()=> {
