@@ -31,6 +31,14 @@ const listingSchema = new Schema(
             required: true
         },
         furnishType: {
+            type: String,
+            required: true
+        },
+        type: {
+            type: String,
+            required: true,
+        },
+        parking: {
             type: Boolean,
             required: true
         },
@@ -40,14 +48,9 @@ const listingSchema = new Schema(
                 required: true
             },
         ],
-        type: {
-            type: String,
-            required: true,
-        },
         owner: {
             type: Schema.Types.ObjectId,
-            ref: 'User',
-            // type: String,
+            ref: 'User'
         }
     },
     { timestamps: true }

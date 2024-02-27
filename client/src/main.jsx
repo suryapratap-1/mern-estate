@@ -8,6 +8,7 @@ import Login from "./pages/Login.jsx"
 import Home from './pages/Home.jsx'
 import PrivateRoute from './components/PrivateRoute.jsx'
 import Profile from './components/Profile.jsx'
+import CreateListing from "./pages/CreateListing.jsx"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
       <Route path='/login' element={<Login />}/>
       <Route element={<PrivateRoute />}>
         <Route path='/profile' element={<Profile />} />
+        <Route path='/create-listing' element={<CreateListing />} />
       </Route>
     </Route>
   )

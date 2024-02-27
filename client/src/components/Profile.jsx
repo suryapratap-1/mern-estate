@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { deleteUserSuccess, deleteUserFailure, signOutSuccess, updateUserSuccess, updateUserFailure } from "../redux/slices/userSlice"
 
 const Profile = () => {
@@ -104,6 +104,12 @@ const Profile = () => {
                     Update
                 </button>
             </form>
+
+            <Link to='/create-listing'>
+                <button className='w-[400px] bg-green-600 text-white py-3 rounded hover:bg-green-700'>
+                    Create Listing
+                </button>
+            </Link>
 
             <div className='w-[400px] flex justify-between'>
                 <button onClick={deleteUserHandler} className='text-red-700 hover:text-orange-500'>Delete account</button>

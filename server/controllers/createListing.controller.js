@@ -2,12 +2,18 @@ import { Listing } from "../models/listing.model.js";
 import { uploadToCloudinary } from "../utils/cloudinary.js";
 
 export const createListing = async (req, res) => {
+    // console.log(req.user)
 
-    const { listingName, description, address, price, bedrooms, bathrooms, kitchens, furnishType } = req.body
+    // console.log(req.files)
 
-    if (!listingName || !description || !address || !price || !bedrooms || !bathrooms || !kitchens || !furnishType ) {
+    const { listingName, description, address, price, bedrooms, bathrooms, kitchens, furnishType, type, parking } = req.body
+
+    // console.log(listingName, description, address, price, bedrooms, bathrooms, kitchens, furnishType, type, parking)
+
+    if (!listingName || !description || !address || !price || !bedrooms || !bathrooms || !kitchens || !furnishType || !type || !parking ) {
         return res.status(401).json({
             success: false,
+            data: {listingName, description, address, price, bedrooms, bathrooms, kitchens, furnishType, type, parking},
             message: "All fields are required."
         })
     }
@@ -16,6 +22,8 @@ export const createListing = async (req, res) => {
         // for single file upload
         // const imagesFromRequest = req.file[0]?.path;
         // await uploadToCloudinary(imagesFromRequest)
+
+        // console.log(req.files)
 
         if (!req.files) return res.status(401).json({ 
             success: false,
