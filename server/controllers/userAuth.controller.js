@@ -59,7 +59,9 @@ export const loginController = async (req, res) => {
             return res.status(409).json({ success: false, message: "User does not exits" })
         }
 
-        if ( bcrypt.compare(password, validUser.password) ) {
+        const validPassword = await bcrypt.compare(password, validUser.password)
+        
+        if ( validPassword ) {
             let token = jwt.sign(
                 {
                     email: validUser.email,
