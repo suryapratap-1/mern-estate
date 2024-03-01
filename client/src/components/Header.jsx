@@ -76,7 +76,7 @@ const Header = () => {
                             <Link to='/profile'>
                                 <button className='pl-2 grid place-items-center'>
                                     <img className='w-10 rounded-full border border-violet-600'
-                                        src={user.currentUser.data.avatar} alt="profile" 
+                                        src={user.currentUser.avatar} alt="profile" 
                                     />
                                 </button>
                             </Link>

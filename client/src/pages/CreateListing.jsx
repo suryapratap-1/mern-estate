@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const CreateListing = () => {
-
+    const [listingError, setListingError] = useState(null);
+    const [loading, setLoading] = useState(false);
     const [files, setFiles] = useState([]);
     const [formData, setFormData] = useState({
         listingName: '', description: '', address: '', price: 25000, bedrooms: 1, 
@@ -20,14 +22,19 @@ const CreateListing = () => {
     };
 
     const fileChangeHandler = (e) => {
-        for( let i of e.target.files) {
-            setFiles((prev) => [...prev, i])
+        if (e.target.files.length > 7) {
+            setListingError('Maximum 6 files can be uploaded')
+        }
+        else setListingError(null)
+        for( let file of e.target.files) {
+            setFiles((prev) => [...prev, file])
         }
     }
 
     const listingFormSubmitHandler = async (e) => {
         e.preventDefault()
-        const fileData = new FormData();
+        setLoading(true)
+        const fileData = new FormData()
         fileData.append('listingName', formData.listingName)
         fileData.append('description', formData.description)
         fileData.append('address', formData.address)
@@ -44,10 +51,21 @@ const CreateListing = () => {
 
         try {
             const res = await axios.post('/api/v1/listings/create', fileData)
+            if (res) {
+                setLoading(false);
+                setFormData({
+                    listingName: '', description: '', address: '', price: 25000, bedrooms: 1, 
+                    bathrooms: 1, kitchens: 1, furnishType: '', type: '', parking: false 
+                })
+                setFiles([])
+                toast.success('You listing has been created')
+            }
             console.log(res)
         } 
         catch (error) {
+            toast.error('Unable to create listing')
             console.log(error)
+            setListingError(error)
         }
     }
 
@@ -176,8 +194,12 @@ const CreateListing = () => {
                             Upload
                         </button> */}
                     </div>
+                    {
+                        listingError && 
+                        <p className='text-red-600'>{listingError}</p>
+                    }
                     <button className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95'>
-                        Create Listing
+                        {loading ? 'Uploading...' : 'Create Listing'}
                     </button>
                 </div>
 

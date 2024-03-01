@@ -73,9 +73,10 @@ export const loginController = async (req, res) => {
                 }
             )
             const { password: pass, ...rest } = validUser._doc
-            res.cookie("access_token", token, { httpOnly: true }).status(200).json({
+            res.cookie("access_token", token, { httpOnly: true, secure: true }).status(200).json({
                     success: true,
                     data: rest,
+                    token: token,
                     message: "User logged in successfully."
                 }
             )

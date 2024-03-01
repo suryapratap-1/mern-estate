@@ -4,6 +4,7 @@ import { signInStart, signInSuccess, signInFailure } from '../redux/slices/userS
 import { Link, useNavigate } from 'react-router-dom'
 import OAuth from '../components/OAuth'
 import toast from 'react-hot-toast'
+import axios from 'axios'
 
 const Login = () => {
     const navigate = useNavigate();
@@ -21,27 +22,25 @@ const Login = () => {
     const submitHandler = async (event) => {
         event.preventDefault();
         dispatch(signInStart());
-        try {
-            const res = await fetch('/api/v1/auth/login', 
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                }
-            )   
-            const data = await res.json();
-            if (data.success === false) {
-                dispatch(signInFailure(data.message));
+        try {     
+            const response = await axios.post('/api/v1/auth/login', formData)
+
+            if (response.success === false) {
+                dispatch(signInFailure(response.data.message));
                 return;
             };
-            dispatch(signInSuccess(data));
+
+            const token = response.data.token;
+            localStorage.setItem('token', token);
+            
+            dispatch(signInSuccess(response.data.data));
             navigate('/');
-            toast.success(data.message);
+            toast.success(response.data.message);
         } 
         catch (error) {
+            dispatch(signInFailure(error));
             console.log(error);
+            toast.error('Login failed 😓')
         }
     }
 

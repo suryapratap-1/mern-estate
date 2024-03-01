@@ -85,19 +85,19 @@ const Profile = () => {
             <form onSubmit={updateUserHandler} className='w-[400px] mt-5 flex flex-col items-center gap-4'>
                 <img 
                     className='w-20 mb-5 rounded-full'
-                    src={currentUser.data.avatar} 
+                    src={currentUser.avatar} 
                     alt="profile" 
                 />
                 <input onChange={changeHandler} className='w-full py-2 px-3 border-2 border-black rounded-sm'
                     type="text" 
                     name='username'
-                    defaultValue={currentUser.data.username}
+                    defaultValue={currentUser.username}
                     placeholder='username' 
                 />
                 <input onChange={changeHandler} className='w-full py-2 px-3 border-2 border-black rounded-sm'
                     type="email" 
                     name='email'
-                    defaultValue={currentUser.data.email}
+                    defaultValue={currentUser.email}
                     placeholder='email' 
                 />
                 <button className='w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-800'>
