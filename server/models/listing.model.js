@@ -34,6 +34,10 @@ const listingSchema = new Schema(
             type: String,
             required: true
         },
+        carpetArea: {
+            type: Number,
+            required: true
+        },
         type: {
             type: String,
             required: true,

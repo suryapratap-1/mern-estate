@@ -9,7 +9,7 @@ export const createListing = async (req, res) => {
 
     // console.log(listingName, description, address, price, bedrooms, bathrooms, kitchens, furnishType, type, parking)
 
-    if (!listingName || !description || !address || !price || !bedrooms || !bathrooms || !kitchens || !furnishType || carpetArea || !type || !parking ) {
+    if (!listingName || !description || !address || !price || !bedrooms || !bathrooms || !kitchens || !furnishType || !carpetArea || !type || !parking ) {
         return res.status(401).json({
             success: false,
             data: {listingName, description, address, price, bedrooms, bathrooms, kitchens, furnishType, carpetArea, type, parking},

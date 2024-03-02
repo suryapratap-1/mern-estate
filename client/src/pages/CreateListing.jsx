@@ -3,12 +3,12 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 
 const CreateListing = () => {
-    const [listingError, setListingError] = useState(null);
+    const [listingError, setListingError] = useState('');
     const [loading, setLoading] = useState(false);
     const [files, setFiles] = useState([]);
     const [formData, setFormData] = useState({
         listingName: '', description: '', address: '', price: 25000, bedrooms: 1, 
-        bathrooms: 1, kitchens: 1, furnishType: '', type: '', parking: false
+        bathrooms: 1, kitchens: 1, furnishType: '', type: '', parking: false, carpetArea: 1800
     })
 
     const changeHandler = (e) => {
@@ -26,7 +26,7 @@ const CreateListing = () => {
             setListingError('Maximum 6 files can be uploaded')
         }
         else setListingError(null)
-        for( let file of e.target.files) {
+        for(let file of e.target.files) {
             setFiles((prev) => [...prev, file])
         }
     }
@@ -45,6 +45,7 @@ const CreateListing = () => {
         fileData.append('furnishType', formData.furnishType)
         fileData.append('type', formData.type)
         fileData.append('parking', formData.parking)
+        fileData.append('carpetArea', formData.carpetArea)
         files.map(file => {
             fileData.append('images', file)
         })
@@ -55,7 +56,7 @@ const CreateListing = () => {
                 setLoading(false);
                 setFormData({
                     listingName: '', description: '', address: '', price: 25000, bedrooms: 1, 
-                    bathrooms: 1, kitchens: 1, furnishType: '', type: '', parking: false 
+                    bathrooms: 1, kitchens: 1, furnishType: '', type: '', parking: false, carpetArea: 1800
                 })
                 setFiles([])
                 toast.success('You listing has been created')
@@ -104,11 +105,11 @@ const CreateListing = () => {
                             />
                         </div>
                         <div className='flex gap-2'>
-                            <label htmlFor="sell">Sell</label>
+                            <label htmlFor="sale">Sale</label>
                             <input className='w-4'
                                 onChange={changeHandler}
-                                type="radio" id='sell' name='type' value='Sell' 
-                                checked={formData.type === 'Sell'}
+                                type="radio" id='sale' name='type' value='Sale' 
+                                checked={formData.type === 'Sale'}
                             />
                         </div>
                     </div>
@@ -134,7 +135,6 @@ const CreateListing = () => {
                     </div>
 
                     <div className="flex gap-6 flex-wrap">
-                        {/* <p className='font-medium'>Parking : </p> */}
                         <div className='flex gap-2'>
                             <label htmlFor="parking" className='font-medium'>Parking</label>
                             <input className='w-4'
@@ -175,6 +175,14 @@ const CreateListing = () => {
                                 onChange={changeHandler}
                                 type="number" name="price" id="price" required 
                                 value={formData.price}
+                            />
+                        </div>
+                        <div className='flex gap-2 items-center'>
+                            <label htmlFor="carpetArea" className='font-medium'>Carpet Area</label>
+                            <input className='p-2 border border-black rounded-lg'
+                                onChange={changeHandler}
+                                type="number" name="carpetArea" id="carpetArea" required 
+                                value={formData.carpetArea}
                             />
                         </div>
                     </div>
