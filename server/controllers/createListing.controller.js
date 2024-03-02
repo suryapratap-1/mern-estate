@@ -3,17 +3,16 @@ import { uploadToCloudinary } from "../utils/cloudinary.js";
 
 export const createListing = async (req, res) => {
     // console.log(req.user)
-
     // console.log(req.files)
 
-    const { listingName, description, address, price, bedrooms, bathrooms, kitchens, furnishType, type, parking } = req.body
+    const { listingName, description, address, price, bedrooms, bathrooms, kitchens, furnishType, carpetArea, type, parking } = req.body
 
     // console.log(listingName, description, address, price, bedrooms, bathrooms, kitchens, furnishType, type, parking)
 
-    if (!listingName || !description || !address || !price || !bedrooms || !bathrooms || !kitchens || !furnishType || !type || !parking ) {
+    if (!listingName || !description || !address || !price || !bedrooms || !bathrooms || !kitchens || !furnishType || carpetArea || !type || !parking ) {
         return res.status(401).json({
             success: false,
-            data: {listingName, description, address, price, bedrooms, bathrooms, kitchens, furnishType, type, parking},
+            data: {listingName, description, address, price, bedrooms, bathrooms, kitchens, furnishType, carpetArea, type, parking},
             message: "All fields are required."
         })
     }
