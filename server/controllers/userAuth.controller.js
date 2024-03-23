@@ -1,18 +1,22 @@
 import { User } from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { generatePassword } from "../utils/generatePassword.js";
 // import { ApiError } from "../utils/ApiError.js";
 // import { ApiResponse } from "../utils/ApiResponse.js";
 
 
-function generatePassword(num) {
-    return Math.random().toString(36).slice(-num)
-}
-
 export const signupController = async (req, res) => {
     try {
-        const { username, email, password } = req.body;
+        const { username, email, password, contactNumber } = req.body;
 
+        if ( !username || !email || !password || !contactNumber ) {
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required."
+            })
+        }
+        
         const existingUser = await User.findOne({ $or: [{username}, {email}] })
         if (existingUser) {
             return res.status(409).json({
@@ -21,7 +25,7 @@ export const signupController = async (req, res) => {
             })
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = await User.create({ username, email, password: hashedPassword });
+        const newUser = await User.create({ username, email, password: hashedPassword, contactNumber });
         const userData = await User.findById(newUser._id, "-password");
 
         res.status(200).json({
