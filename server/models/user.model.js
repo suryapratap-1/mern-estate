@@ -16,6 +16,10 @@ const userSchema = new Schema(
             unique: true,
             lowercase: true
         },
+        contactNumber: {
+            type: String,
+            required: true,
+        },
         password: {
             type: String,
             required: [true, "Password is required"],
