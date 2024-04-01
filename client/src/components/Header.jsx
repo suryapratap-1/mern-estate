@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { IoHome } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
+import { FaSearch } from "react-icons/fa";
+import { TbCircleLetterR } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutSuccess } from "../redux/slices/userSlice"
 import toast from 'react-hot-toast';
 
 const Header = () => {
-    const navigate = useNavigate();
+    const [searchTerm, setSearchTerm] = useState('');
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const signOutHandler = async () => {
         try {
@@ -24,24 +27,50 @@ const Header = () => {
         }
     }
 
+    const submitHandler = (e) => {
+        e.preventDefault();
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('searchTerm', searchTerm);
+        const searchQuery = urlParams.toString();
+        if (searchTerm !== '') {
+            navigate(`listing/search?${searchQuery}`);
+        }
+    }
+
+    useEffect(() => {
+        const urlParams = new URLSearchParams(location.search);
+        const searchTermFromUrl = urlParams.get('searchTerm');
+        if (searchTermFromUrl) {
+            setSearchTerm(searchTermFromUrl);
+        }
+    }, [location.search])
+
     return (
-        <nav className='px-4 min-[769px]:px-20 flex items-center justify-between w-full py-2 text-sm shadow'>
+        <nav className='px-4 min-[769px]:px-20 w-full py-2 flex items-center justify-between text-sm shadow'>
 
             <Link to='/'>
-                <div className='flex items-center gap-2 font-bold text-2xl'>
-                    <IoHome className='text-violet-500'/>
+                <div className='flex items-center gap-1 font-bold text-2xl'>
+                    <IoHome className='text-xl text-red-500'/>
                     <div>
-                        <span className=' text-gray-700'>ESTATE</span>
-                        <span className=' text-violet-500'>.com</span>
+                        <span className='text-red-500'>estate</span>
+                        <span className='text-[#2b2b2b]'>.com</span>
                     </div>
                 </div>
             </Link>
 
-            <div className='gap-10 font-medium hidden min-[769px]:flex'>
+            <div className='gap-10 font-medium hidden min-[769px]:flex tracking-wider'>
                 <div>Rent</div>
                 <div>Buy</div>
                 <div>Sell</div>
-                <div className='flex items-center gap-2 whitespace-nowrap'>
+                <div>Mortgage</div>
+                <div className='relative'>
+                    <p>Find Realtors</p>
+                    <sup className='absolute -right-3'>
+                        <TbCircleLetterR />
+                    </sup> 
+                </div>
+
+                {/* <div className='flex items-center gap-2 whitespace-nowrap'>
                     <p>Manage Property</p>
                     <button className='mt-1'>
                         <IoIosArrowDown />
@@ -52,8 +81,21 @@ const Header = () => {
                     <button className='mt-1'>
                         <IoIosArrowDown />
                     </button>
-                </div>
+                </div> */}
             </div>
+
+            <form className='border p-1 flex border-black rounded-full' onSubmit={submitHandler}>
+                <input className='w-[16rem] py-1.5 px-4 rounded-l-full outline-none'
+                    type="text" 
+                    placeholder='address/location' 
+                    value={searchTerm}
+                    name='localAddress'
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button className='w-8 flex justify-center items-center bg-[#2b2b2b] text-white rounded-full'>
+                    <FaSearch />
+                </button>
+            </form>
 
             <div>
                 {
@@ -66,11 +108,11 @@ const Header = () => {
                                 </button>
                             </Link> */}
                             <Link>
-                                <button className='px-6 h-10 font-medium text-black border-2 border-gray-300 rounded hover:bg-violet-500 hover:text-white hover:border-violet-500'>
+                                <button className='px-6 h-10 font-medium text-black border-2 border-gray-300 rounded hover:bg-[#2b2b2b] hover:text-white hover:border-[#2b2b2b]'>
                                     About
                                 </button>
                             </Link>
-                            <button onClick={signOutHandler} className='w-20 h-10 font-medium bg-violet-500 border border-violet-500 rounded'>
+                            <button onClick={signOutHandler} className='w-20 h-10 font-medium bg-[#2b2b2b] border border-[#2b2b2b] rounded'>
                                 Sign out
                             </button>
                             <Link to='/profile'>
@@ -83,14 +125,14 @@ const Header = () => {
                         </div>
                     ) :
                     (
-                        <div className=' gap-3 text-white sm:flex hidden'>
+                        <div className=' gap-2 text-white sm:flex hidden'>
                             <Link to='login'>
-                                <button className='w-20 h-10 font-medium text-black border-2 border-gray-300 rounded hover:bg-violet-500 hover:text-white hover:border-violet-500'>
+                                <button className='w-20 h-10 font-medium text-black border rounded-full hover:bg-[#2b2b2b] hover:text-white hover:border-[#2b2b2b]'>
                                     Login
                                 </button>
                             </Link>
                             <Link to='sign-up'>
-                                <button className='w-20 h-10 font-medium bg-violet-500 border border-violet-500 rounded' >Sign up</button>
+                                <button className='w-20 h-10 font-medium bg-[#2b2b2b] border border-[#2b2b2b] rounded-full' >Sign up</button>
                             </Link>
                         </div>
                     ) 

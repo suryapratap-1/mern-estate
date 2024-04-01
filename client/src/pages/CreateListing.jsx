@@ -7,7 +7,7 @@ const CreateListing = () => {
     const [loading, setLoading] = useState(false);
     const [files, setFiles] = useState([]);
     const [formData, setFormData] = useState({
-        listingName: '', description: '', address: '', price: 25000, bedrooms: 1, 
+        listingName: '', description: '', localAddress: '', price: 25000, bedrooms: 1, country: '', state: '', pincode: null,
         bathrooms: 1, kitchens: 1, furnishType: '', type: '', parking: false, carpetArea: 1800
     })
 
@@ -20,6 +20,7 @@ const CreateListing = () => {
             }
         });
     };
+    // console.log(formData)
 
     const fileChangeHandler = (e) => {
         if (e.target.files.length > 7) {
@@ -37,10 +38,13 @@ const CreateListing = () => {
         const fileData = new FormData()
         fileData.append('listingName', formData.listingName)
         fileData.append('description', formData.description)
-        fileData.append('address', formData.address)
+        fileData.append('localAddress', formData.localAddress)
         fileData.append('price', formData.price)
         fileData.append('bedrooms', formData.bedrooms)
         fileData.append('bathrooms', formData.bathrooms)
+        fileData.append('country', formData.country)
+        fileData.append('state', formData.state)
+        fileData.append('pincode', formData.pincode)
         fileData.append('kitchens', formData.kitchens)
         fileData.append('furnishType', formData.furnishType)
         fileData.append('type', formData.type)
@@ -55,7 +59,7 @@ const CreateListing = () => {
             if (res) {
                 setLoading(false);
                 setFormData({
-                    listingName: '', description: '', address: '', price: 25000, bedrooms: 1, 
+                    listingName: '', description: '', localAddress: '', price: 25000, bedrooms: 1, country: '', state: '', pincode: null,
                     bathrooms: 1, kitchens: 1, furnishType: '', type: '', parking: false, carpetArea: 1800
                 })
                 setFiles([])
@@ -78,37 +82,91 @@ const CreateListing = () => {
             <form onSubmit={listingFormSubmitHandler} className='flex flex-col gap-4 sm:flex-row'>
 
                 <div className='flex flex-col gap-4 flex-1'>
-                    <input className='border border-black p-3 rounded-lg'
+                    <input 
+                        className='border border-black p-3 rounded-lg'
                         onChange={changeHandler} 
-                        type="text" placeholder='listing name' id='listingName' name='listingName' maxLength='62' minLength='5' required
+                        type="text" 
+                        placeholder='listing name' 
+                        maxLength='62' minLength='5' 
+                        id='listingName' 
+                        required
+                        name='listingName' 
                         value={formData.listingName}
                     />
-                    <textarea className='border border-black p-3 rounded-lg'
+                    <textarea 
+                        className='border border-black p-3 rounded-lg'
                         onChange={changeHandler}
-                        type="description" placeholder='Description' id='description' name='description' required
+                        type="description" 
+                        placeholder='Description' 
+                        id='description' 
+                        name='description' 
+                        required
                         value={formData.description}
                     />
-                    <input className='border border-black p-3 rounded-lg'
+                    <input 
+                        className='border border-black p-3 rounded-lg'
                         onChange={changeHandler}
-                        type="text" placeholder='Address' id='address' name='address' required
-                        value={formData.address}
+                        type="text" 
+                        placeholder='local address' 
+                        required
+                        id='localAddress' 
+                        name='localAddress' 
+                        value={formData.localAddress}
+                    />
+                    <input 
+                        className='border border-black p-3 rounded-lg'
+                        onChange={changeHandler}
+                        type="text" 
+                        placeholder='country' 
+                        required
+                        id='country' 
+                        name='country' 
+                        value={formData.country}
+                    />
+                    <input 
+                        className='border border-black p-3 rounded-lg'
+                        onChange={changeHandler}
+                        type="text" 
+                        placeholder='state' 
+                        required
+                        id='state' 
+                        name='state' 
+                        value={formData.state}
+                    />
+                    <input 
+                        className='border border-black p-3 rounded-lg'
+                        onChange={changeHandler}
+                        type="text" 
+                        placeholder='pincode' 
+                        required
+                        id='pincode' 
+                        name='pincode' 
+                        value={formData.pincode}
                     />
 
                     <div className="flex gap-6 flex-wrap">
                         <p className='font-medium'>Type : </p>
                         <div className='flex gap-2'>
-                            <label htmlFor="type">Rent</label>
-                            <input className='w-4'
+                            <label htmlFor="rent">Rent</label>
+                            <input 
+                                className='w-4'
                                 onChange={changeHandler}
-                                type="radio" id='rent' name='type' value='Rent' 
+                                type="radio" 
+                                id='rent' 
+                                name='type' 
+                                value='Rent' 
                                 checked={formData.type === 'Rent'}
                             />
                         </div>
                         <div className='flex gap-2'>
                             <label htmlFor="sale">Sale</label>
-                            <input className='w-4'
+                            <input 
+                                className='w-4'
                                 onChange={changeHandler}
-                                type="radio" id='sale' name='type' value='Sale' 
+                                type="radio" 
+                                id='sale' 
+                                name='type' 
+                                value='Sale' 
                                 checked={formData.type === 'Sale'}
                             />
                         </div>
@@ -118,17 +176,25 @@ const CreateListing = () => {
                         <p className='font-medium'>Furnished Type : </p>
                         <div className='flex gap-2'>
                             <label htmlFor="Furnished">Furnished</label>
-                            <input className='w-4'
+                            <input 
+                                className='w-4'
                                 onChange={changeHandler}
-                                type="radio" id='Furnished' name='furnishType' value='Furnished' 
+                                type="radio" 
+                                id='Furnished' 
+                                name='furnishType' 
+                                value='Furnished' 
                                 checked={formData.furnishType === 'Furnished'}
                             />
                         </div>
                         <div className='flex gap-2'>
                             <label htmlFor="Semi-furnished">Semi furnished</label>
-                            <input className='w-4'
+                            <input 
+                                className='w-4'
                                 onChange={changeHandler}
-                                type="radio" id='Semi-furnished' name='furnishType' value='Semi furnished' 
+                                type="radio" 
+                                id='Semi-furnished' 
+                                name='furnishType' 
+                                value='Semi furnished' 
                                 checked={formData.furnishType === 'Semi furnished'}
                             />
                         </div>
@@ -137,9 +203,13 @@ const CreateListing = () => {
                     <div className="flex gap-6 flex-wrap">
                         <div className='flex gap-2'>
                             <label htmlFor="parking" className='font-medium'>Parking</label>
-                            <input className='w-4'
+                            <input 
+                                className='w-4'
                                 onChange={changeHandler}
-                                type="checkbox" id='parking' name='parking' value={formData.checked}
+                                type="checkbox" 
+                                id='parking' 
+                                name='parking' 
+                                value={formData.parking}
                             />
                         </div>
                     </div>
@@ -147,41 +217,64 @@ const CreateListing = () => {
                     <div className="flex gap-6 flex-wrap">
                         <div className='flex gap-2 items-center'>
                             <label htmlFor="bedrooms" className='font-medium'>Bedrooms</label>
-                            <input className='p-2 border border-black rounded-lg'
+                            <input 
+                                className='p-2 border border-black rounded-lg'
                                 onChange={changeHandler}
-                                type="number" name="bedrooms" id="bedrooms" min='1' max='10' required 
+                                type="number" 
+                                required 
+                                name="bedrooms" 
+                                id="bedrooms" 
+                                min='1' max='10' 
                                 value={formData.bedrooms}
                             />
                         </div>
                         <div className='flex gap-2 items-center'>
                             <label htmlFor="bathrooms" className='font-medium'>Bathrooms</label>
-                            <input className='p-2 border border-black rounded-lg'
+                            <input 
+                                className='p-2 border border-black rounded-lg'
                                 onChange={changeHandler}
-                                type="number" name="bathrooms" id="bathrooms" min='1' max='10' required 
+                                type="number" 
+                                min='1' max='10' 
+                                required 
+                                id="bathrooms" 
+                                name="bathrooms" 
                                 value={formData.bathrooms}
                             />
                         </div>
                         <div className='flex gap-2 items-center'>
                             <label htmlFor="kitchens" className='font-medium'>Kitchens</label>
-                            <input className='p-2 border border-black rounded-lg'
+                            <input 
+                                className='p-2 border border-black rounded-lg'
                                 onChange={changeHandler}
-                                type="number" name="kitchens" id="kitchens" min='1' max='10' required 
+                                type="number" 
+                                required 
+                                id="kitchens" 
+                                min='1' max='10' 
+                                name="kitchens" 
                                 value={formData.kitchens}
                             />
                         </div>
                         <div className='flex gap-2 items-center'>
                             <label htmlFor="price" className='font-medium'>Price</label>
-                            <input className='p-2 border border-black rounded-lg'
+                            <input 
+                                className='p-2 border border-black rounded-lg'
                                 onChange={changeHandler}
-                                type="number" name="price" id="price" required 
+                                type="number" 
+                                name="price" 
+                                id="price" 
+                                required 
                                 value={formData.price}
                             />
                         </div>
                         <div className='flex gap-2 items-center'>
                             <label htmlFor="carpetArea" className='font-medium'>Carpet Area</label>
-                            <input className='p-2 border border-black rounded-lg'
+                            <input 
+                                className='p-2 border border-black rounded-lg'
                                 onChange={changeHandler}
-                                type="number" name="carpetArea" id="carpetArea" required 
+                                type="number" 
+                                name="carpetArea" 
+                                id="carpetArea" 
+                                required 
                                 value={formData.carpetArea}
                             />
                         </div>

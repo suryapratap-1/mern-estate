@@ -41,7 +41,7 @@ const OAuth = () => {
     }
 
     return (
-        <button onClick={OAuthHandler} type='button' className='py-3 flex items-center justify-center gap-2 border-2 rounded-lg'>
+        <button onClick={OAuthHandler} type='button' className='bg-white py-3 flex items-center justify-center gap-2 border-2 rounded-lg hover:bg-[#ffffffdc]'>
             <FcGoogle className=' text-2xl'/>
             <p>CONTINUE WITH GOOGLE</p>
         </button>

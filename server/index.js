@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 import { connectDB } from "./database/database.js";
 import { app } from "./app.js"
-import { userRouter } from "./routes/user.router.js";
-import { listingRouter } from "./routes/listing.router.js";
+import { userRouter } from "./routes/user.routes.js";
+import { listingRouter } from "./routes/listing.routes.js";
 
 dotenv.config();
 

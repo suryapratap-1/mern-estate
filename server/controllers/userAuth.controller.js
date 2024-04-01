@@ -69,7 +69,8 @@ export const loginController = async (req, res) => {
             let token = jwt.sign(
                 {
                     email: validUser.email,
-                    id: validUser._id
+                    id: validUser._id,
+                    contact: validUser.contactNumber
                 },
                 process.env.ACCESS_TOKEN_SECRET,
                 {

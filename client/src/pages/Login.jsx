@@ -45,46 +45,56 @@ const Login = () => {
     }
 
     return (
-        <div className='w-1/2 mx-auto p-6 flex flex-col items-center gap-8'>
+        <main>
 
-            <h1 className='text-4xl font-bold'>Sign In</h1>
-            
-            <form onSubmit={submitHandler} className='flex flex-col gap-4'>
+            <div className='relative w-full h-[40rem] z-0'>
+                <img className='w-full h-full object-cover'
+                    src="/signup-bg.jpg" alt="signup-background" 
+                />
+                <div className='absolute bottom-[0%] bg-black opacity-60 w-full h-full' />
+            </div>
 
-                <label htmlFor="email">
-                    <input type="email" id='email' name='email' placeholder='Email' required
-                        className=' w-[400px] py-2 px-3 border-2 border-black rounded-sm'
-                        onChange={changeHandler}
-                    />
-                </label>
+            <div className='absolute z-10 left-1/2 -translate-x-1/2 bottom-20 w-1/3 mx-auto p-6 flex flex-col items-center gap-8
+                rounded-md backdrop-opacity-80 bg-[#ffffff1e] shadow-lg shadow-[#00000081]'>
+                
+                <h1 className='text-4xl font-bold text-white'>Sign In</h1>
+                
+                <form onSubmit={submitHandler} className='flex flex-col gap-4'>
 
-                <label htmlFor="password">
-                    <input type="password" id='password' name='password' placeholder='Password' required
-                        className=' w-[400px] py-2 px-3 border-2 border-black rounded-sm'
-                        onChange={changeHandler}
-                    />
-                </label>
+                    <label htmlFor="email">
+                        <input 
+                            type="email" id='email' name='email' placeholder='Email' required
+                            className=' w-[400px] py-2 px-3 border border-black rounded-md'
+                            onChange={changeHandler}
+                        />
+                    </label>
 
-                <button className=' bg-violet-600 text-white py-3 rounded hover:bg-violet-800'>
-                    {loading ? "Loading..." : "Login"}
-                </button>
+                    <label htmlFor="password">
+                        <input 
+                            type="password" id='password' name='password' placeholder='Password' required
+                            className=' w-[400px] py-2 px-3 border border-black rounded-md'
+                            onChange={changeHandler}
+                        />
+                    </label>
 
-                <OAuth />
+                    <button className='py-3 rounded bg-[#1a1a1a] text-white hover:bg-[#222222]'>
+                        {loading ? "Loading..." : "Login"}
+                    </button>
 
-                <div className='flex gap-2'>
-                    <p>Dont have an account?</p>
+                    <OAuth />
+
                     <Link to='/sign-up'>
-                        <span className='text-violet-600'>Sign Up</span>
+                        <span className='text-white'>Dont have an account? Sign Up</span>
                     </Link>
-                </div>
+                    
+                    <p className='text-red-500'>
+                        {error ? error : ""}
+                    </p>
 
-                <p className='text-red-500'>
-                    {error ? error : ""}
-                </p>
+                </form>
+            </div>
 
-            </form>
-
-        </div>
+        </main>
     )
 }
 

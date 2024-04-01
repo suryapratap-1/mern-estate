@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 
 const listingSchema = new Schema(
     {
@@ -10,9 +11,21 @@ const listingSchema = new Schema(
             type: String,
             required: true,
         },
-        address: {
+        localAddress: {
             type: String,
             required: true,
+        },
+        country: {
+            type: String,
+            required: true
+        },
+        state: {
+            type: String,
+            required: true
+        },
+        pincode: {
+            type: Number,
+            required: true
         },
         price: {
             type: Number,
@@ -59,5 +72,7 @@ const listingSchema = new Schema(
     },
     { timestamps: true }
 )
+
+listingSchema.plugin(mongooseAggregatePaginate)
 
 export const Listing = mongoose.model("Listing", listingSchema);
