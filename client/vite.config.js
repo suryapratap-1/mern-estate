@@ -7,7 +7,8 @@ export default defineConfig({
     proxy: {
       '/api': {
         // target: 'http://localhost:3000',
-        target: 'window.location.origin',
+        // target: 'window.location.origin',
+        target: 'https://mern-estate-beta.vercel.app/',
         secure: false,
       }
     }
