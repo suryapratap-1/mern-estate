@@ -58,14 +58,17 @@ const Signup = () => {
                 <div className='absolute bottom-[0%] bg-black opacity-60 w-full h-full' />
             </div>
 
-            <div className='absolute z-10 left-1/2 -translate-x-1/2 bottom-20 w-1/3 mx-auto p-6 flex flex-col items-center gap-8 bg-[#ffffff1e] rounded-md backdrop-opacity-80 shadow-lg shadow-[#00000081]'>
+            <div className='absolute z-10 left-1/2 -translate-x-1/2 bottom-4 lg:bottom-[20%] xl:bottom-[30%]
+                w-[90%] md:w-[500px] mx-auto p-6 flex flex-col items-center gap-8 bg-[#ffffff1e] rounded-md backdrop-opacity-80 shadow-lg 
+                shadow-[#00000081]
+            '>
                 
-                <h1 className=' text-white text-4xl font-bold'>Sign Up</h1>
+                <h1 className='text-3xl sm:text-4xl font-bold text-white'>Sign Up</h1>
 
-                <form onSubmit={submitHandler} className='flex flex-col gap-4'>
+                <form onSubmit={submitHandler} className='w-full flex flex-col gap-4'>
                     <label htmlFor="username">
                         <input
-                            className=' w-[400px] py-2 px-3 border border-black rounded-md'
+                            className='w-full py-1.5 sm:py-2 px-3 border border-black rounded-md'
                             onChange={changeHandler}
                             type="text" 
                             name="username" 
@@ -76,7 +79,7 @@ const Signup = () => {
 
                     <label htmlFor="email">
                         <input
-                            className=' w-[400px] py-2 px-3 border border-black rounded-md'
+                            className='w-full py-1.5 sm:py-2 px-3 border border-black rounded-md'
                             onChange={changeHandler}
                             type="email" 
                             name="email" 
@@ -87,7 +90,7 @@ const Signup = () => {
 
                     <label htmlFor="password">
                         <input
-                            className=' w-[400px] py-2 px-3 border border-black rounded-md'
+                            className='w-full py-1.5 sm:py-2 px-3 border border-black rounded-md'
                             onChange={changeHandler}
                             type="password" 
                             name="password" 
@@ -98,7 +101,7 @@ const Signup = () => {
 
                     <label htmlFor="contactNumber">
                         <input
-                            className=' w-[400px] py-2 px-3 border border-black rounded-md'
+                            className='w-full py-1.5 sm:py-2 px-3 border border-black rounded-md'
                             onChange={changeHandler}
                             type="text" 
                             name="contactNumber" 
@@ -107,14 +110,14 @@ const Signup = () => {
                         />
                     </label>
 
-                    <button className=' bg-[#1a1a1a] text-white py-3 rounded hover:bg-[#222222]'>
+                    <button className='bg-[#1a1a1a] text-white py-2 sm:py-3 rounded hover:bg-[#222222]'>
                         {loading ? "Loading..." : "Sign Up"}
                     </button>
 
                     <OAuth />
 
                     <Link to='/login'>
-                        <span className='text-white'>Already have an account? Login</span>
+                        <span className='text-sm sm:text-base text-white'>Already have an account? Login</span>
                     </Link>
 
                     <p className='text-red-500'>
