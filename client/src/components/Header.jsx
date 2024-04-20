@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { IoHome } from "react-icons/io5";
-import { IoIosArrowDown } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 import { TbCircleLetterR } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutSuccess } from "../redux/slices/userSlice"
 import toast from 'react-hot-toast';
+import { GiHamburgerMenu } from "react-icons/gi";
+
 
 const Header = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -46,7 +47,9 @@ const Header = () => {
     }, [location.search])
 
     return (
-        <nav className='px-4 min-[769px]:px-20 w-full py-2 flex items-center justify-between text-sm shadow'>
+        <nav className='px-4 min-[769px]:px-20 w-full py-2 text-sm shadow
+            flex items-center justify-between
+        '>
 
             <Link to='/'>
                 <div className='flex items-center gap-1 font-bold text-2xl'>
@@ -58,17 +61,21 @@ const Header = () => {
                 </div>
             </Link>
 
-            <div className='gap-10 font-medium hidden min-[769px]:flex tracking-wider'>
+            <div className='block sm:hidden '>
+                <GiHamburgerMenu className=' text-xl' />
+            </div>
+
+            <div className='gap-10 font-medium hidden lg:flex tracking-wider'>
                 <div>Rent</div>
-                <div>Buy</div>
-                <div>Sell</div>
-                <div>Mortgage</div>
+                <div>Sale</div>
+                <div>Listings</div>
+                {/* <div>Mortgage</div>
                 <div className='relative'>
                     <p>Find Realtors</p>
                     <sup className='absolute -right-3'>
                         <TbCircleLetterR />
                     </sup> 
-                </div>
+                </div> */}
 
                 {/* <div className='flex items-center gap-2 whitespace-nowrap'>
                     <p>Manage Property</p>
@@ -84,8 +91,8 @@ const Header = () => {
                 </div> */}
             </div>
 
-            <form className='border p-1 flex border-black rounded-full' onSubmit={submitHandler}>
-                <input className='w-[16rem] py-1.5 px-4 rounded-l-full outline-none'
+            <form className='sm:flex hidden border p-1 border-black rounded-full' onSubmit={submitHandler}>
+                <input className='md:w-[16rem] py-1 md:py-1.5 px-4 rounded-l-full outline-none'
                     type="text" 
                     placeholder='address/location' 
                     value={searchTerm}
@@ -97,11 +104,11 @@ const Header = () => {
                 </button>
             </form>
 
-            <div>
+            <div className='sm:flex items-center hidden'>
                 {
                     user.currentUser != null ?
                     (
-                        <div className='sm:flex hidden items-center gap-3 text-white'>
+                        <div className='flex items-center gap-3 text-white'>
                             {/* <Link to='/dashboard'>
                                 <button className='px-6 h-10 font-medium text-black border-2 border-gray-300 rounded hover:bg-violet-500 hover:text-white hover:border-violet-500'>
                                     Dashboard
@@ -127,12 +134,12 @@ const Header = () => {
                     (
                         <div className=' gap-2 text-white sm:flex hidden'>
                             <Link to='login'>
-                                <button className='w-20 h-10 font-medium text-black border rounded-full hover:bg-[#2b2b2b] hover:text-white hover:border-[#2b2b2b]'>
+                                <button className='w-20 md:h-10 h-9 font-medium text-black border rounded-full hover:bg-[#2b2b2b] hover:text-white hover:border-[#2b2b2b]'>
                                     Login
                                 </button>
                             </Link>
                             <Link to='sign-up'>
-                                <button className='w-20 h-10 font-medium bg-[#2b2b2b] border border-[#2b2b2b] rounded-full' >Sign up</button>
+                                <button className='w-20 md:h-10 h-9 font-medium bg-[#2b2b2b] border border-[#2b2b2b] rounded-full' >Sign up</button>
                             </Link>
                         </div>
                     ) 
