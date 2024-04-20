@@ -6,10 +6,12 @@ import {Link} from 'react-router-dom'
 // import { fetchListingStart, fetchListingSuccess, fetchPropertyFailure } from '../redux/slices/listingSlice'
 import { FaCircle } from "react-icons/fa";
 import { getDaysFromNow } from '../utils/getDaysFromNow';
+import {nanoid} from 'nanoid';
 
 const Home = () => {
     const [listings, setListings] = useState([]);
     const [loading, setLoading] = useState(false);
+    let nanoID = nanoid();
     // const dispatch = useDispatch();
     // const listing = useSelector(state => state.listings)
 
@@ -39,11 +41,11 @@ const Home = () => {
         <main>
 
             <div className='relative w-full'>
-                <img className='h-[28rem] w-full object-fill'
+                <img className='h-[28rem] w-full object-cover'
                     src="/hp-hero-desktop.jpg" alt="home-page-wallpaper" 
                 />
-                <div className='absolute bottom-72 w-full flex justify-center'>
-                    <h1 className='w-1/2 pt-8 text-white text-6xl font-bold text-center'>
+                <div className='absolute bottom-52 lg:bottom-72 w-full flex justify-center'>
+                    <h1 className=' w-2/3 md:w-1/2 pt-8 text-white text-3xl sm:text-5xl font-bold text-center'>
                         The #1 site real estate professionals trust*
                     </h1>
                 </div> 
@@ -66,10 +68,10 @@ const Home = () => {
 
             {/* showing listings */}
             <div className=' mt-5 px-4 min-[769px]:px-18'>
-                <h1 className='w-full text-center text-4xl font-bold text-gray-700'>Popular Listings</h1>
+                <h1 className='w-full text-center text-4xl font-bold text-gray-700 my-5'>Popular Listings</h1>
                 {
-                    listings.map((listing, index) => (
-                        <div key={index} className='md:px-12 md:py-6 grid md:grid-cols-4 grid-cols-2 md:gap-5 gap-8'>
+                    listings.map((listing) => (
+                        <div key={nanoID} className='md:px-12 md:py-6 grid sm:grid-cols-2 lg:grid-cols-4 grid-cols-1 md:gap-5 gap-8'>
                             {
                                 listing.listings.map(list => (
                                     <Link to={`/listing/${list._id}`}>
@@ -107,25 +109,25 @@ const Home = () => {
             </div>
 
             {/* section 1 */}
-            <section className='mt-10 grid grid-cols-2'>
+            <section className='mt-10 grid sm:grid-cols-2 gap-4 sm:gap-0'>
                 <div>
                     <img src="/home-section-desktop.jpg" alt="" />
                 </div>
-                <div className='px-14 flex flex-col justify-center gap-5 items-start'>
-                    <h2 className=' text-4xl font-bold text-gray-800'>Need a home loan? Get pre-approved</h2>
-                    <p className=' text-lg font-semibold text-gray-800'>Find a lender who can offer competitive mortgage rates and help you with pre-approval.</p>
-                    <button className='px-5 py-3 rounded-full bg-[#2b2b2b] text-white hover:underline hover:bg-gray-600'>Get pre-approved now</button>
+                <div className='px-4 sm:px-14 flex flex-col justify-center gap-5 items-start'>
+                    <h2 className='text-2xl sm:text-4xl font-bold text-gray-800'>Need a home loan? Get pre-approved</h2>
+                    <p className='text-base sm:text-lg font-semibold text-gray-800'>Find a lender who can offer competitive mortgage rates and help you with pre-approval.</p>
+                    <button className='px-5 py-2 sm:py-3 rounded-full bg-[#2b2b2b] text-white hover:underline hover:bg-gray-600'>
+                        Get pre-approved now
+                    </button>
                 </div>
             </section>
             
             {/* section 2 */}
-            <section className='grid grid-cols-2'>
-                <div className='px-14 flex flex-col justify-center gap-5 items-start'>
-                    <h2 className=' text-4xl font-bold text-gray-800'>Get Local Info</h2>
-                    <p className=' text-lg font-semibold text-gray-800'>
-                        Does it have pet-friendly rentals? How are the schools? Get important local information on the area you're most interested in.
-                    </p>
-                    <button className='px-5 py-3 rounded-full bg-[#2b2b2b] text-white hover:underline hover:bg-gray-600'>
+            <section className='mt-10 md:mt-0 mb-2 sm:mb-0 grid sm:grid-cols-2 gap-4 sm:gap-0'>
+                <div className='px-4 sm:px-14 flex flex-col justify-center gap-5 items-start'>
+                    <h2 className='text-2xl sm:text-4xl font-bold text-gray-800'>Get Local Info</h2>
+                    <p className='text-base sm:text-lg font-semibold text-gray-800'>Does it have pet-friendly rentals? How are the schools? Get important local information on the area you're most interested in.</p>
+                    <button className='px-5 py-2 sm:py-3 rounded-full bg-[#2b2b2b] text-white hover:underline hover:bg-gray-600'>
                         Get pre-approved now
                     </button>
                 </div>
