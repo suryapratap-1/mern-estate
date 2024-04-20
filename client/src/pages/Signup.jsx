@@ -58,7 +58,7 @@ const Signup = () => {
                 <div className='absolute bottom-[0%] bg-black opacity-60 w-full h-full' />
             </div>
 
-            <div className='absolute z-10 left-1/2 -translate-x-1/2 bottom-4 lg:bottom-[20%] xl:bottom-[30%]
+            <div className='absolute z-10 left-1/2 -translate-x-1/2 bottom-4 lg:bottom-[20%] xl:bottom-[8%]
                 w-[90%] md:w-[500px] mx-auto p-6 flex flex-col items-center gap-8 bg-[#ffffff1e] rounded-md backdrop-opacity-80 shadow-lg 
                 shadow-[#00000081]
             '>
