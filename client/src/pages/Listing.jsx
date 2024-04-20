@@ -36,23 +36,23 @@ const Listing = () => {
     }
 
     return (
-        <main className='py-2 px-[10rem] '> 
-            <div className='py-5 flex flex-col gap-4 bg-white rounded'>
-                <h1 className=' text-3xl font-bold tracking-wide text-[#2b2b2b]'>{listing.listingName}</h1>
+        <main className='py-2 px-8 md:px-[10rem] '> 
+            <div className='py-5 flex flex-col gap-2 sm:gap-4 bg-white rounded'>
+                <h1 className='text-xl sm:text-3xl font-bold tracking-wide text-[#2b2b2b]'>{listing.listingName}</h1>
                 <div className='rounded'>
-                    <img className='w-full h-[450px] rounded-md object-cover'
+                    <img className='w-full sm:h-[450px] rounded-md object-cover'
                         src={listing.images} alt='listing image' 
                     />
                 </div>
 
                 <div className='flex gap-2 items-center'>
-                    <FaCircle className=' text-green-600'/>
-                    <p className='font-semibold text-lg text-gray-700'>
+                    <FaCircle className=' text-sm sm:text-base text-green-600'/>
+                    <p className='font-semibold text-base sm:text-lg text-gray-700'>
                         For {listing.type}
                     </p>
                 </div>
-                <p className='font-bold text-3xl text-[#202020]'>Rs {priceFormatter(listing.price)}</p>
-                <div className='flex gap-8 text-lg'>
+                <p className='font-bold text-xl sm:text-3xl text-[#202020]'>Rs {priceFormatter(listing.price)}</p>
+                <div className='flex flex-wrap gap-3 sm:gap-8 text-base sm:text-lg'>
                     <div className='flex gap-3 items-center'>
                         <span className='font-bold '>{listing.bedrooms}</span>
                         <p>bed</p>
@@ -70,7 +70,7 @@ const Listing = () => {
                     </div>
                 </div>
                 <p className='text-lg tracking-wider'>{listing.address}</p>
-                <div className='flex gap-20 text-lg'>
+                <div className='flex flex-wrap gap-4 sm:gap-20 text-lg'>
                     <div className='flex gap-3 items-center'>
                         <FiHome className=' text-xl'/>
                         <div className='flex flex-col'>
@@ -112,17 +112,17 @@ const Listing = () => {
                         </div>
                     </div>
                 </div>
-                <p className='text-lg pt-4'>{listing.description}</p>
+                <p className='text-base sm:text-lg pt-4'>{listing.description}</p>
             </div>
 
             <div className='mt-12 flex flex-col items-center gap-5'>
-                <h2 className='text-4xl font-bold text-[#2b2b2b] text-center'>Contact Owner</h2>
+                <h2 className='text-2xl sm:text-4xl font-bold text-[#2b2b2b] text-center'>Contact Owner</h2>
                 <form onSubmit={mailHandler}
-                    className='w-[400px] flex flex-col gap-4 mb-20'
+                    className='w-full sm:w-[400px] flex flex-col gap-4 mb-8 sm:mb-20'
                 >
                     <div className='flex flex-col'>
                         <label htmlFor="clientName">Name<sup className='relative top-0 text-lg text-red-600'>*</sup></label>
-                        <input className=' px-4 py-3 border rounded-md border-black focus:outline-red-400'
+                        <input className=' px-4 py-1.5 sm:py-3 border rounded-md border-black focus:outline-red-400'
                             type="text"
                             placeholder='John Doe'
                             required
@@ -132,7 +132,7 @@ const Listing = () => {
                     </div>
                     <div className='flex flex-col'>
                         <label htmlFor="clientEmail">Email<sup className='relative top-0 text-lg text-red-600'>*</sup></label>
-                        <input className=' px-4 py-3 border rounded-md border-black focus:outline-red-400'
+                        <input className=' px-4 py-1.5 sm:py-3 border rounded-md border-black focus:outline-red-400'
                             type="johndoe@gmail.com"
                             placeholder='John Doe'
                             required
@@ -142,7 +142,7 @@ const Listing = () => {
                     </div>
                     <div className='flex flex-col'>
                         <label htmlFor="clientContact">Contact<sup className='relative top-0 text-lg text-red-600'>*</sup></label>
-                        <input className=' px-4 py-3 border rounded-md border-black focus:outline-red-400'
+                        <input className=' px-4 py-1.5 sm:py-3 border rounded-md border-black focus:outline-red-400'
                             type="text"
                             placeholder='+91 0000000000'
                             required
@@ -150,7 +150,7 @@ const Listing = () => {
                             id='clientContact'
                         />
                     </div>
-                    <button className='mt-3 p-3 rounded-md bg-[#2b2b2b] text-white hover:bg-[#333333]'>Email Agent</button>
+                    <button className='mt-3 py-1.5 sm:py-3 rounded-md bg-[#2b2b2b] text-white hover:bg-[#333333]'>Email Agent</button>
                 </form>
             </div>
         </main>
