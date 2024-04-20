@@ -11,7 +11,7 @@ const Footer = () => {
     return (
         <footer className='px-4 min-[769px]:px-32 py-14 bg-[#242424] text-gray-200'>
             <div className='flex flex-col gap-12'> 
-                <div className='flex gap-4'>
+                <div className='flex flex-wrap gap-4'>
                     <div className=' p-3 bg-white rounded-full'>
                         <FaFacebook className=' text-lg text-black' />
                     </div>
