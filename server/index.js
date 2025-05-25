@@ -11,6 +11,14 @@ connectDB()
     app.listen(process.env.PORT || 8000, () => {
         console.log(`⚙️  Server started at http://localhost:${process.env.PORT}`)
     })
+
+    app.get("/api/v1", (req, res) => {
+        res.status(200).json({
+            success: true,
+            message: "Welcome to the API"
+        });
+    });
+
     app.on("error", (error) => {
         console.log("Error: ", error)
         throw error
